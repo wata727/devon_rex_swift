@@ -1,9 +1,7 @@
 FROM norionomura/sourcekit:311
-MAINTAINER Masataka Kuwabara <masataka.kuwabara@actcat.co.jp>
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
     autoconf \
@@ -33,7 +31,7 @@ RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pu
     rm -rf /var/lib/apt/lists/*
 
 ENV RUBY_MAJOR="2.4" \
-    RUBY_VERSION="2.4.1"
+    RUBY_VERSION="2.4.2"
 
 # some of ruby's build scripts are written in ruby
 # we purge this later to make sure our final image uses what we just built
@@ -53,6 +51,7 @@ RUN apt-get update -y \
 
 RUN apt-get update -y && \
     apt-get install -y language-pack-en && \
+    rm -rf /var/lib/apt/lists/* && \
     update-locale en_US.UTF-8
 
 ENV LC_ALL="en_US.UTF-8" \
