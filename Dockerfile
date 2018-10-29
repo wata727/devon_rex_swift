@@ -1,4 +1,4 @@
-FROM quay.io/actcat/devon_rex_base:1.0.8
+FROM quay.io/actcat/devon_rex_base:1.0.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
