@@ -2,7 +2,7 @@ FROM quay.io/actcat/devon_rex_base:1.0.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY swift-4.1.3-RELEASE-ubuntu16.04.tar.gz.sig .
+COPY swift-4.2.1-RELEASE-ubuntu16.04.tar.gz.sig .
 
 # https://swift.org/download
 RUN gpg --keyserver hkp://pool.sks-keyservers.net \
@@ -18,17 +18,10 @@ RUN apt-get update && \
     apt-get install -y clang libpython2.7 libxml2 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget --no-verbose https://swift.org/builds/swift-4.1.3-release/ubuntu1604/swift-4.1.3-RELEASE/swift-4.1.3-RELEASE-ubuntu16.04.tar.gz && \
-    gpg --verify swift-4.1.3-RELEASE-ubuntu16.04.tar.gz.sig && \
-    tar xvf swift-4.1.3-RELEASE-ubuntu16.04.tar.gz && \
-    mv swift-4.1.3-RELEASE-ubuntu16.04/usr /usr/local/swift && \
-    rm -rf swift-4.1.3-RELEASE-ubuntu16.04.tar.gz swift-4.1.3-RELEASE-ubuntu16.04
+RUN wget --no-verbose https://swift.org/builds/swift-4.2.1-release/ubuntu1604/swift-4.2.1-RELEASE/swift-4.2.1-RELEASE-ubuntu16.04.tar.gz && \
+    gpg --verify swift-4.2.1-RELEASE-ubuntu16.04.tar.gz.sig && \
+    tar xvf swift-4.2.1-RELEASE-ubuntu16.04.tar.gz && \
+    mv swift-4.2.1-RELEASE-ubuntu16.04/usr /usr/local/swift && \
+    rm -rf swift-4.2.1-RELEASE-ubuntu16.04.tar.gz swift-4.2.1-RELEASE-ubuntu16.04
 
-RUN apt-get update -y && \
-    apt-get install -y language-pack-en && \
-    rm -rf /var/lib/apt/lists/* && \
-    update-locale en_US.UTF-8
-
-ENV LC_ALL="en_US.UTF-8" \
-    LANG="en_US.UTF-8" \
-    PATH=/usr/local/swift/bin:$PATH
+ENV PATH=/usr/local/swift/bin:$PATH
